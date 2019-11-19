@@ -8,8 +8,5 @@
       "config": { "distDir": "build" }
     }
   ],
-  "routes": [
-    { "src": "/static/(.*)", "dest": "app/static/$1" },
-    { "src": "/(.*)", "dest": "app/index.html" }
-  ]
+  "routes": [{ "src": "/(.*)", "dest": "app/index.html" }]
 }
