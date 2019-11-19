@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { applyMiddleware, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+
+import "./App.css";
+import LoginForm from "./components/Login";
+import SignUpForm from "./components/SignUp";
+import Header from "./components/Header";
+import Dasboard from "./components/Dashboard";
+
+import reducer from "./reducers";
+
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <Header />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/register" component={SignUpForm} />
+        <Route path="/dashboard" component={Dasboard} />
+      </Provider>
     </div>
   );
 }
