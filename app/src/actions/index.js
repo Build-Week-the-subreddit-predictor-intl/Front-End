@@ -7,12 +7,15 @@ const baseUrl = `https://subreddit-predictor.herokuapp.com/api`;
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOADING = "LOADING";
 export const LOAD_COMPLETE = "LOAD_COMPLETE";
+export const SET_REDDIT_URL = "SET_REDDIT_URL";
 
 const loading = () => ({ type: LOADING });
 
 const loadComplete = () => ({ type: LOAD_COMPLETE });
 
 const loginSuccess = payload => ({ type: LOGIN_SUCCESS, payload });
+
+const setRedditUrl = payload => ({ type: SET_REDDIT_URL, payload });
 
 const login = ({ username, password }) => dispatch => {
   dispatch(loading());
@@ -36,7 +39,24 @@ const register = ({ username, password }) => dispatch => {
     .catch(err => console.error(err));
 };
 
+const getRedditUrl = () => dispatch => {
+  dispatch(loading());
+
+  return axiosAuth()
+    .get(`${baseUrl}/reddit`)
+    .then(res => dispatch(setRedditUrl(res.data.url)))
+    .catch(err => console.error(err));
+};
+
+const test = () => dispatch => {
+  return axiosAuth()
+    .get(`${baseUrl}/reddit`)
+    .then(res => console.log(res));
+};
+
 export default {
   login,
-  register
+  register,
+  getRedditUrl,
+  test
 };

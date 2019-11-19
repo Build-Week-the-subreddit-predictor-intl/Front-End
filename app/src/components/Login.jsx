@@ -10,7 +10,7 @@ function LoginForm(props) {
     <AuthWrapper>
       <div className="login-form">
         <Form>
-        <h2>Welcome to PostHere!</h2>
+          <h2>Welcome to PostHere!</h2>
           <label>
             <ErrorMessage
               name="username"
@@ -59,9 +59,12 @@ const LoginFormWithFormik = withFormik({
   handleSubmit(values, tools) {
     // values: the values we get back from the form
     // tools: some helpful methods we can use to interact with the form
-    tools.props.dispatch(
-      actions.login({ username: values.username, password: values.password })
-    ).then(() => tools.props.history.push("/dashboard"));
+    tools.props
+      .dispatch(
+        actions.login({ username: values.username, password: values.password })
+      )
+      .then(() => tools.props.dispatch(actions.getRedditUrl()))
+      .then(() => tools.props.history.push("/dashboard"));
   }
 })(LoginForm);
 
