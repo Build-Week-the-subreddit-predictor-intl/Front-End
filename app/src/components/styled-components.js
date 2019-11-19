@@ -40,7 +40,8 @@ export const AuthWrapper = styled.div`
         padding-left: 15px;
         border: 2px solid #24a0ed;
         transition: border-color ease-in-out 0.2s;
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           border-color: #0079d3;
         }
       }
@@ -101,7 +102,67 @@ export const NavWrapper = styled.div`
   }
 `;
 
-export const DashboardWrapper = styled.div``;
+export const DashboardWrapper = styled.div`
+  position: relative;
+  top: 30px;
+  max-width: 80%;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  form {
+    padding: 20px 0;
+    label {
+      width: 100%;
+      padding: 0 20px;
+      position: relative;
+      margin: 20px auto 30px;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      align-content: flex-start;
+      span {
+        white-space: nowrap;
+      }
+      .error {
+        position: absolute;
+        padding: 0 10px;
+        top: 55px;
+        left: 180px;
+        font-size: 1.3rem;
+        color: red;
+        background-color: #ffe6e6;
+        height: 20px;
+        border-radius: 10px;
+      }
+      textarea {
+        width: 100%;
+        /* height: 50px; */
+        border-radius: 10px;
+        padding-left: 15px;
+        border: 2px solid #24a0ed;
+        transition: border-color ease-in-out 0.2s;
+        &:hover,
+        &:focus {
+          border-color: #0079d3;
+        }
+      }
+    }
+    button {
+      width: 150px;
+      height: 40px;
+      background-color: #24a0ed;
+      color: white;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      transition: background-color ease-in-out 0.2s;
+      &:hover {
+        background-color: #0079d3;
+      }
+    }
+  }
+`;
 
 export const PostCardWrapper = styled.div`
   .box {
