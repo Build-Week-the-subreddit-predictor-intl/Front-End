@@ -1,13 +1,25 @@
-import { LOGIN_SUCCESS } from "../actions";
+import { LOGIN_SUCCESS, LOADING } from "../actions";
 
-const initialState = { loggedIn: false };
+const initialState = {
+  loggedIn: sessionStorage.getItem("token") ? true : false,
+  loading: false,
+  username: ""
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        loading: true
+      };
+
     case LOGIN_SUCCESS:
       return {
         ...state,
-        loggedIn: true
+        loggedIn: true,
+        loading: false,
+        username: action.payload
       };
 
     default:
