@@ -9,8 +9,9 @@ import "./App.css";
 import LoginForm from "./components/Login";
 import SignUpForm from "./components/SignUp";
 import Header from "./components/Header";
-import Dasboard from "./components/Dashboard";
+import Dashboard from "./components/Dashboard";
 import PostCollection from "./components/PostCollection";
+import PrivateRoute from "./components/PrivateRoute";
 
 import reducer from "./reducers";
 
@@ -21,11 +22,15 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <Header />
-        <div className = "content-container">
+        <div className="content-container">
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={SignUpForm} />
-          <Route path="/dashboard" component={Dasboard} />
-          <Route path="/post-history" component={PostCollection} />
+          <PrivateRoute path="/dashboard">
+            <Dashboard />
+          </PrivateRoute>
+          <PrivateRoute path="/post-history">
+            <PostCollection />
+          </PrivateRoute>
         </div>
       </Provider>
     </div>
