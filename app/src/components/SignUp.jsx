@@ -10,6 +10,7 @@ function SignUpForm(props) {
     <AuthWrapper>
       <div className="login-form">
         <Form>
+          <h2>Welcome to PostHere!</h2>
           <label>
             <ErrorMessage
               name="username"
@@ -31,7 +32,9 @@ function SignUpForm(props) {
               name="confirm_password"
               render={msg => <div className="error">{msg}</div>}
             />
-            Confirm your Password
+            <span>
+              Confirm Password
+            </span>
             <Field
               type="password"
               name="confirm_password"
@@ -39,7 +42,7 @@ function SignUpForm(props) {
             />
           </label>
 
-          <input type="submit" />
+          <button type="submit" >Sign Up</button>
         </Form>
       </div>
     </AuthWrapper>
@@ -63,7 +66,7 @@ const SignUpFormWithFormik = withFormik({
         "Length",
         "Length of your password should be between 12 and 30 characters",
         val =>
-          val.toString().length >= 12 && val.toString().length <= 30
+          val && val.toString().length >= 12 && val.toString().length <= 30
             ? true
             : false
       ),

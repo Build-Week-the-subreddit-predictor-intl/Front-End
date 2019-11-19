@@ -10,6 +10,7 @@ import LoginForm from "./components/Login";
 import SignUpForm from "./components/SignUp";
 import Header from "./components/Header";
 import Dasboard from "./components/Dashboard";
+import PostCollection from "./components/PostCollection";
 
 import reducer from "./reducers";
 
@@ -20,9 +21,12 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <Header />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/register" component={SignUpForm} />
-        <Route path="/dashboard" component={Dasboard} />
+        <div className = "content-container">
+          <Route path="/login" component={LoginForm} />
+          <Route path="/register" component={SignUpForm} />
+          <Route path="/dashboard" component={Dasboard} />
+          <Route path="/post-history" component={PostCollection} />
+        </div>
       </Provider>
     </div>
   );

@@ -10,6 +10,7 @@ function LoginForm(props) {
     <AuthWrapper>
       <div className="login-form">
         <Form>
+        <h2>Welcome to PostHere!</h2>
           <label>
             <ErrorMessage
               name="username"
@@ -27,7 +28,7 @@ function LoginForm(props) {
             <Field type="password" name="password" placeholder="Password" />
           </label>
 
-          <input type="submit" />
+          <button type="submit">Log In</button>
         </Form>
       </div>
     </AuthWrapper>

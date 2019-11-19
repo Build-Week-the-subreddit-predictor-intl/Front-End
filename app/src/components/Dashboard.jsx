@@ -1,8 +1,10 @@
 import React from 'react';
 import { withFormik, Form, Field,  ErrorMessage } from 'formik';
-import {DashboardWrapper} from './styled-components';
 import * as Yup from 'yup';
 import axios from 'axios';
+
+import {DashboardWrapper} from './styled-components';
+import PostCollection from './PostCollection';
 
 
 function Dashboard(props){
@@ -12,11 +14,12 @@ function Dashboard(props){
                 <Form>
                     <label>
                         <ErrorMessage
-                            name = "Title"
+                            name = "title"
                             render = {msg=> <div className = "error">{msg}</div>}
                             />
                         Title
                         <Field
+                            as = "textarea"
                             type = "text"
                             name = "title"
                             placeholder = "Post Title"
@@ -28,15 +31,19 @@ function Dashboard(props){
                             render = {msg=> <div className = "error">{msg}</div>}
                             />
                         Text
-                        <Field
+                        <Field as = "textarea"
                             type = "textarea"
                             name = "text"
                             placeholder = "Text (required)"
                             />
                     </label>
 
-                    <input type="submit"/>
+                    <button type="submit">Submit Post</button>
                 </Form>
+            </div>
+
+            <div className = "subreddits">
+                
             </div>
         </DashboardWrapper>
     );
@@ -54,7 +61,7 @@ const DashboardWithFormik = withFormik({
         title: Yup.string()
             .required("Your post needs to have a title"),
         text: Yup.string()
-            .required("Your past needs to contain some text"),
+            .required("Your post needs to contain some text"),
     }),
 
     handleSubmit(values, tools) {
