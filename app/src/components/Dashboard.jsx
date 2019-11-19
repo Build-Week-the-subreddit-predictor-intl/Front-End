@@ -1,8 +1,10 @@
 import React from 'react';
 import { withFormik, Form, Field,  ErrorMessage } from 'formik';
-import {DashboardWrapper} from './styled-components';
 import * as Yup from 'yup';
 import axios from 'axios';
+
+import {DashboardWrapper} from './styled-components';
+import PostCollection from './PostCollection';
 
 
 function Dashboard(props){
@@ -37,6 +39,10 @@ function Dashboard(props){
 
                     <input type="submit"/>
                 </Form>
+            </div>
+
+            <div className = "subreddits">
+                
             </div>
         </DashboardWrapper>
     );
