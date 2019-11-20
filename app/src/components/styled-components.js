@@ -7,6 +7,17 @@ export const AuthWrapper = styled.div`
   margin: 0 auto;
   background-color: white;
   border-radius: 10px;
+  .error {
+    position: absolute;
+    padding: 0 10px;
+    top: 55px;
+    left: 180px;
+    font-size: 1.3rem;
+    color: red;
+    background-color: #ffe6e6;
+    height: 20px;
+    border-radius: 10px;
+  }
   form {
     padding: 20px 0;
     label {
@@ -22,17 +33,7 @@ export const AuthWrapper = styled.div`
       span {
         white-space: nowrap;
       }
-      .error {
-        position: absolute;
-        padding: 0 10px;
-        top: 55px;
-        left: 180px;
-        font-size: 1.3rem;
-        color: red;
-        background-color: #ffe6e6;
-        height: 20px;
-        border-radius: 10px;
-      }
+
       input {
         width: 220px;
         height: 50px;

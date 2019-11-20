@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOADING } from "../actions";
+import { LOGIN_SUCCESS, LOADING, SET_REDDIT_URL } from "../actions";
 
 const initialState = {
   loggedIn: sessionStorage.getItem("token") ? true : false,
@@ -20,6 +20,13 @@ const reducer = (state = initialState, action) => {
         loggedIn: true,
         loading: false,
         username: action.payload
+      };
+
+    case SET_REDDIT_URL:
+      return {
+        ...state,
+        loading: false,
+        redditAuthUrl: action.payload
       };
 
     default:
