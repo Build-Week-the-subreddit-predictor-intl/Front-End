@@ -2,10 +2,10 @@ import React from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { AuthWrapper } from "./styled-components";
+import { connect } from "react-redux";
+import actions from "../actions";
 
 function SignUpForm(props) {
-  console.log(props);
-
   return (
     <AuthWrapper>
       <div className="login-form">
@@ -32,9 +32,7 @@ function SignUpForm(props) {
               name="confirm_password"
               render={msg => <div className="error">{msg}</div>}
             />
-            <span>
-              Confirm Password
-            </span>
+            <span>Confirm Password</span>
             <Field
               type="password"
               name="confirm_password"
@@ -42,7 +40,7 @@ function SignUpForm(props) {
             />
           </label>
 
-          <button type="submit" >Sign Up</button>
+          <button type="submit">Sign Up</button>
         </Form>
       </div>
     </AuthWrapper>
@@ -60,20 +58,33 @@ const SignUpFormWithFormik = withFormik({
 
   validationSchema: Yup.object().shape({
     username: Yup.string().required("Please enter your Username"),
-    password: Yup.string()
-      .required("Please enter your Password")
-      .test(
-        "Length",
-        "Length of your password should be between 12 and 30 characters",
-        val =>
-          val && val.toString().length >= 12 && val.toString().length <= 30
-            ? true
-            : false
-      ),
+    password: Yup.string().required("Please enter your Password"),
+    // .test(
+    //   "Length",
+    //   "Length of your password should be between 12 and 30 characters",
+    //   val =>
+    //     val && val.toString().length >= 12 && val.toString().length <= 30
+    //       ? true
+    //       : false
+    // ),
     confirm_password: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords don't match")
       .required("Password confirm is required")
-  })
+  }),
+  handleSubmit(values, tools) {
+    // values: the values we get back from the form
+    // tools: some helpful methods we can use to interact with the form
+      tools.props
+        .dispatch(
+          actions.register({
+            username: values.username,
+            password: values.password
+          })
+        )
+        .then(() => tools.props.history.push("/login"))
+  }
 })(SignUpForm);
 
-export default SignUpFormWithFormik;
+const ConnectForm = connect()(SignUpFormWithFormik);
+
+export default ConnectForm;

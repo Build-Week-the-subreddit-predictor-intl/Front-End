@@ -2,8 +2,8 @@ import React from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
-import { AuthWrapper } from "./styled-components";
 import actions from "../actions";
+import { AuthWrapper } from "./styled-components";
 
 function LoginForm(props) {
   return (
@@ -45,16 +45,15 @@ const LoginFormWithFormik = withFormik({
 
   validationSchema: Yup.object().shape({
     username: Yup.string().required("Please enter your Username"),
-    password: Yup.string()
-      .required("Please enter your Password")
-      .test(
-        "Length",
-        "Length of your password should be between 12 and 30 characters",
-        val =>
-          val && val.toString().length >= 12 && val.toString().length <= 30
-            ? true
-            : false
-      )
+    password: Yup.string().required("Please enter your Password")
+    // .test(
+    //   "Length",
+    //   "Length of your password should be between 12 and 30 characters",
+    //   val =>
+    //     val && val.toString().length >= 12 && val.toString().length <= 30
+    //       ? true
+    //       : false
+    // )
   }),
 
   handleSubmit(values, tools) {
@@ -62,7 +61,7 @@ const LoginFormWithFormik = withFormik({
     // tools: some helpful methods we can use to interact with the form
     tools.props.dispatch(
       actions.login({ username: values.username, password: values.password })
-    );
+    ).then(() => tools.props.history.push("/dashboard"));
   }
 })(LoginForm);
 
