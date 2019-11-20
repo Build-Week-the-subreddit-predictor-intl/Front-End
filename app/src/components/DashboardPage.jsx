@@ -7,16 +7,16 @@ import actions from "../actions";
 import DashboardWithFormik from "./Dashboard";
 import { ButtonReddit } from "./styled-components";
 
-
 const DashBoardWithRedditAuth = () => {
   const redditUrl = useSelector(state => state.redditAuthUrl);
-  const authed = useSelector(state => state.redditAuthed);
+  const authed = useSelector(state => state.redditAuth);
   const location = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
     const values = queryString.parse(location.search);
     if (!authed && values.state) {
+      dispatch(actions.getRedditUrl());
       dispatch(
         actions.sendRedditAuthToBackend({
           state: values.state,
@@ -24,8 +24,8 @@ const DashBoardWithRedditAuth = () => {
         })
       );
     }
-    console.log(values);
-  }, [location.search]);
+  }, [authed, dispatch, location.search]);
+
   return (
     <>
       {authed ? (

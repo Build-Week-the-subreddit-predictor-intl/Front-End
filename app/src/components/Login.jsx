@@ -65,7 +65,7 @@ const LoginFormWithFormik = withFormik({
       .dispatch(
         actions.login({ username: values.username, password: values.password })
       )
-      .then(() => tools.props.dispatch(actions.getRedditUrl()))
+      
       .catch(() => {
         tools.setFieldError("password", "Bad username or password");
       });

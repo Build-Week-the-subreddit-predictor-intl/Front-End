@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Login from "./Login";
 
 const LoginPage = () => {
-  const loggedIn =
-    useSelector(state => state.loggedIn) && localStorage.getItem("token")
-      ? true
-      : false;
-
+  const loggedIn = useSelector(state => state.loggedIn);
   const history = useHistory();
 
   useEffect(() => {

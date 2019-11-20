@@ -44,4 +44,3 @@ function App() {
 }
 
 export default App;
-// http://localhost:3000/dashboard?state=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiUmVkZGl0QXV0aFRva2VuIiwiaWQiOjE3LCJpYXQiOjE1NzQyNTgzMjYsImV4cCI6MTU3NDI4NzEyNn0.qbMzIPv0YnIGFURt7c55l8yQ34SaqwqHaGHxfKWXdXc&code=gX9IJTGiQ5cng6PUIhlEes-h8zg
