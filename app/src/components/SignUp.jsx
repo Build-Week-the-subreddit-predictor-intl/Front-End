@@ -74,14 +74,15 @@ const SignUpFormWithFormik = withFormik({
   handleSubmit(values, tools) {
     // values: the values we get back from the form
     // tools: some helpful methods we can use to interact with the form
-      tools.props
-        .dispatch(
-          actions.register({
-            username: values.username,
-            password: values.password
-          })
-        )
-        .then(() => tools.props.history.push("/login"))
+    console.log(values.username, values.password);
+    tools.props
+      .dispatch(
+        actions.register({
+          username: values.username,
+          password: values.password
+        })
+      )
+      .then(() => tools.props.history.push("/login"));
   }
 })(SignUpForm);
 

@@ -6,7 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 import "./App.css";
-import LoginForm from "./components/Login";
+import LoginPage from "./components/LoginPage";
 import SignUpForm from "./components/SignUp";
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";
@@ -23,7 +23,7 @@ function App() {
       <Provider store={store}>
         <Header />
         <div className="content-container">
-          <Route path="/login" component={LoginForm} />
+          <Route path="/login" component={LoginPage} />
           <Route path="/register" component={SignUpForm} />
           <PrivateRoute path="/dashboard">
             <Dashboard />
