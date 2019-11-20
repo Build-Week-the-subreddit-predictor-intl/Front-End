@@ -3,7 +3,10 @@ import actions, {
   LOADING,
   SET_REDDIT_URL,
   SET_REDDIT_AUTHED,
-  LOGOUT
+  LOGOUT,
+  ADD_POST,
+  EDIT_POST,
+  DELETE
 } from "../actions";
 
 const initialState = {
@@ -87,7 +90,10 @@ const reducer = (
       console.log("authed", actions.payload);
       const newState = {
         ...state,
-        redditAuthed: actions.payload
+        redditAuthed: actions.payload.authed,
+        redditAuthState: actions.payload.state,
+        redditAuthCode: actions.payload.code,
+        loading: false
       };
       localStorage.setItem("appState", JSON.stringify(newState));
       return newState;
@@ -96,11 +102,47 @@ const reducer = (
     case LOGOUT: {
       const newState = {
         ...state,
-        loggedIn: false
+        loggedIn: false,
+        loading: false
       };
       localStorage.setItem("appState", JSON.stringify(newState));
       return newState;
     }
+
+    case DELETE: {
+      const newState = {
+        ...state,
+        posts: state.posts.filter(post => post.id !== action.payload),
+        loading: false
+      };
+      localStorage.setItem("appState", JSON.stringify(newState));
+      return newState;
+    }
+
+    case ADD_POST: {
+      const newState = {
+        ...state,
+        posts: [...state.posts, actions.payload],
+        loading: false
+      };
+      localStorage.setItem("appState", JSON.stringify(newState));
+      return newState;
+    }
+
+    case EDIT_POST: {
+      const newState = {
+        ...state,
+        posts: state.posts.map(post => {
+          if (post.id === action.payload.id) {
+            return action.payload;
+          } else return post;
+        }),
+        loading: false
+      };
+      localStorage.setItem("appState", JSON.stringify(newState));
+      return newState;
+    }
+
     default:
       return state;
   }
