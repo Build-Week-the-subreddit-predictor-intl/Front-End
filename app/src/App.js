@@ -9,7 +9,7 @@ import "./App.css";
 import LoginPage from "./components/LoginPage";
 import SignUpForm from "./components/SignUp";
 import Header from "./components/Header";
-import Dashboard from "./components/Dashboard";
+import DashboardPage from "./components/DashboardPage";
 import PostCollection from "./components/PostCollection";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -28,7 +28,7 @@ function App() {
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={SignUpForm} />
           <PrivateRoute path="/dashboard">
-            <Dashboard />
+            <DashboardPage />
           </PrivateRoute>
           <PrivateRoute exact path="/post-history">
             <PostCollection />

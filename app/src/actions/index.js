@@ -46,8 +46,15 @@ const getRedditUrl = () => dispatch => {
     .catch(err => console.error(err.response));
 };
 
+const sendRedditAuthToBackend = ({ state, code }) => dispatch => {
+  dispatch(loading());
+
+  return axiosAuth().post(`${baseUrl}/reddit/auth`, {state, code}).then(res => console.log(res));
+};
+
 export default {
   login,
   register,
-  getRedditUrl
+  getRedditUrl,
+  sendRedditAuthToBackend
 };
