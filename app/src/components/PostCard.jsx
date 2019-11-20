@@ -1,6 +1,7 @@
-import React from "react";
-import { PostCardWrapper } from "./styled-components";
+import React from 'react';
+import { PostCardWrapper } from './styled-components';
 import {Link} from 'react-router-dom';
+import RecSubredditsContainer from './RecSubredditsContainer';
 
 export default function PostCard(props) {
   return (
@@ -18,6 +19,7 @@ export default function PostCard(props) {
         <button>Edit Post</button>
         <button>Delete Post</button>
       </div>
+      <RecSubredditsContainer/>
     </PostCardWrapper>
   );
 }
