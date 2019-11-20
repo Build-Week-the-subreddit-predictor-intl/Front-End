@@ -6,7 +6,7 @@ import Login from "./Login";
 
 const LoginPage = () => {
   const loggedIn =
-    useSelector(state => state.loggedIn) && sessionStorage.getItem("token")
+    useSelector(state => state.loggedIn) && localStorage.getItem("token")
       ? true
       : false;
 

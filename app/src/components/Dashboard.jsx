@@ -3,6 +3,7 @@ import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 import { DashboardWrapper, ButtonReddit } from "./styled-components";
 import PostCollection from "./PostCollection";
@@ -80,12 +81,17 @@ const DashboardWithFormik = withFormik({
 const DashBoardWithRedditAuth = () => {
   const redditUrl = useSelector(state => state.redditAuthUrl);
   const authed = useSelector(state => state.redditAuthed);
+  const location = useLocation();
+
+  console.log(location);
   return (
     <>
       {authed ? (
         <DashboardWithFormik />
       ) : (
-        <a href={redditUrl}><ButtonReddit>Authorize with Reddit</ButtonReddit></a>
+        <a href={redditUrl}>
+          <ButtonReddit>Authorize with Reddit</ButtonReddit>
+        </a>
       )}
     </>
   );

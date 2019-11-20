@@ -20,8 +20,8 @@ const login = ({ username, password }) => dispatch => {
   return axiosAuth()
     .post(`${baseUrl}/auth/login`, { username, password })
     .then(res => {
-      sessionStorage.setItem("token", res.data.token);
-      sessionStorage.setItem("username", username);
+      console.log(res);
+      localStorage.setItem("token", res.data.token);
       dispatch(loginSuccess(username));
     });
 };
