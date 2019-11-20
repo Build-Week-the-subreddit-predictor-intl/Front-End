@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { NavWrapper } from "./styled-components";
+import logo from '../images/logo.jpg'
 
 export default function Header() {
   const loggedIn = useSelector(state => state.loggedIn);
@@ -9,7 +10,7 @@ export default function Header() {
   return (
     <header>
       <NavWrapper>
-        <img className="logo" src = "../images/logo.jpg" alt = "PostHere logo"/>
+        <img className="logo" src = {logo} alt = "PostHere logo"/>
         <nav>
           <ul>
             <li>
