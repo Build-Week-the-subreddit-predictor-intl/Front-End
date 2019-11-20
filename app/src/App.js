@@ -34,7 +34,7 @@ function App() {
           <PrivateRoute exact path="/post-history">
             <PostCollection />
           </PrivateRoute>
-          <PrivateRoute path="/post-history/post:id">
+          <PrivateRoute path="/post-history/post/:id">
             <PostCard />
           </PrivateRoute>
         </div>

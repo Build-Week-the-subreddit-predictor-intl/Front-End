@@ -8,7 +8,7 @@ export default function PostCard(props) {
   console.log(location);
   return (
     <PostCardWrapper className="post-card">
-      <Link to={`/post-history/post${props.postData.id}`}>
+      <Link to={`/post-history/post/${props.postData.id}`}>
         <div className="box">
           <div className="box-header">
             <img src="https://via.placeholder.com/80x80" />
