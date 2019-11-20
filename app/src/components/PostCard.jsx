@@ -19,7 +19,6 @@ export default function PostCard(props) {
     ? posts.find(post => `${post.id}` === match.params.id)
     : "";
 
-  console.log(filterPost);
   return (
     <PostCardWrapper className="post-card">
       <Link to={link}>
