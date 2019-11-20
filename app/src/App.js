@@ -14,6 +14,8 @@ import PostCollection from "./components/PostCollection";
 import PrivateRoute from "./components/PrivateRoute";
 
 import reducer from "./reducers";
+import PostCard from "./components/PostCard";
+import {previousPosts} from './components/PostCollection';
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -28,8 +30,11 @@ function App() {
           <PrivateRoute path="/dashboard">
             <Dashboard />
           </PrivateRoute>
-          <PrivateRoute path="/post-history">
+          <PrivateRoute exact path="/post-history">
             <PostCollection />
+          </PrivateRoute>
+          <PrivateRoute path="/post-history/post:id">
+            <PostCard postData = {previousPosts[0]}/>
           </PrivateRoute>
         </div>
       </Provider>

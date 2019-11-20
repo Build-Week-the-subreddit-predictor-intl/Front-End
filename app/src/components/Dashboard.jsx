@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-import { DashboardWrapper } from "./styled-components";
+import { DashboardWrapper, ButtonReddit } from "./styled-components";
 import PostCollection from "./PostCollection";
 
 function Dashboard(props) {
@@ -85,7 +85,7 @@ const DashBoardWithRedditAuth = () => {
       {authed ? (
         <DashboardWithFormik />
       ) : (
-        <a href={redditUrl}>Authorize with Reddit</a>
+        <a href={redditUrl}><ButtonReddit>Authorize with Reddit</ButtonReddit></a>
       )}
     </>
   );
