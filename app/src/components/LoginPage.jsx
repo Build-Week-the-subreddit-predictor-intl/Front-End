@@ -5,7 +5,11 @@ import { useSelector } from "react-redux";
 import Login from "./Login";
 
 const LoginPage = () => {
-  const loggedIn = useSelector(state => state.loggedIn);
+  const loggedIn =
+    useSelector(state => state.loggedIn) && sessionStorage.getItem("token")
+      ? true
+      : false;
+
   const history = useHistory();
 
   useEffect(() => {
