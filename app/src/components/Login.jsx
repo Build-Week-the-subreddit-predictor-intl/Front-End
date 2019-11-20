@@ -8,6 +8,7 @@ import { AuthWrapper } from "./styled-components";
 function LoginForm(props) {
   return (
     <AuthWrapper>
+      {props.error && <p className="error">{props.error}</p>}
       <div className="login-form">
         <Form>
           <h2>Welcome to PostHere!</h2>
@@ -64,7 +65,9 @@ const LoginFormWithFormik = withFormik({
         actions.login({ username: values.username, password: values.password })
       )
       .then(() => tools.props.dispatch(actions.getRedditUrl()))
-      .then(() => tools.props.history.push("/dashboard"));
+      .catch(() => {
+        tools.props.setError("Bad username or password");
+      });
   }
 })(LoginForm);
 

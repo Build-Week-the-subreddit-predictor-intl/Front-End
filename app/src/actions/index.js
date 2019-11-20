@@ -1,5 +1,3 @@
-import { useHistory } from "react-router-dom";
-
 import axiosAuth from "../utils/axiosAuth";
 
 const baseUrl = `https://subreddit-predictor.herokuapp.com/api`;
@@ -23,9 +21,9 @@ const login = ({ username, password }) => dispatch => {
     .post(`${baseUrl}/auth/login`, { username, password })
     .then(res => {
       sessionStorage.setItem("token", res.data.token);
+      sessionStorage.setItem("username", username);
       dispatch(loginSuccess(username));
-    })
-    .catch(err => console.error(err));
+    });
 };
 
 const register = ({ username, password }) => dispatch => {
@@ -36,7 +34,7 @@ const register = ({ username, password }) => dispatch => {
     .then(() => {
       dispatch(loadComplete());
     })
-    .catch(err => console.error(err));
+    .catch(err => console.log(err.response));
 };
 
 const getRedditUrl = () => dispatch => {
@@ -45,18 +43,11 @@ const getRedditUrl = () => dispatch => {
   return axiosAuth()
     .get(`${baseUrl}/reddit`)
     .then(res => dispatch(setRedditUrl(res.data.url)))
-    .catch(err => console.error(err));
-};
-
-const test = () => dispatch => {
-  return axiosAuth()
-    .get(`${baseUrl}/reddit`)
-    .then(res => console.log(res));
+    .catch(err => console.error(err.response));
 };
 
 export default {
   login,
   register,
-  getRedditUrl,
-  test
+  getRedditUrl
 };
