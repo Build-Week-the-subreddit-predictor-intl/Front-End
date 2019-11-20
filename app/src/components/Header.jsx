@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { NavWrapper } from "./styled-components";
 
@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header>
       <NavWrapper>
-        <img className="logo" src = "https://files.slack.com/files-pri/T4JUEB3ME-FQJA37JMP/logo.jpg"/>
+        <img className="logo" src = "../images/logo.jpg" alt = "PostHere logo"/>
         <nav>
           <ul>
             <li>
