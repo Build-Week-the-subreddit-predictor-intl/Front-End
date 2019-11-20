@@ -12,10 +12,10 @@ import Header from "./components/Header";
 import DashboardPage from "./components/DashboardPage";
 import PostCollection from "./components/PostCollection";
 import PrivateRoute from "./components/PrivateRoute";
+import Logout from "./components/Logout";
 
 import reducer from "./reducers";
 import PostCard from "./components/PostCard";
-import { previousPosts } from "./components/PostCollection";
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -26,6 +26,7 @@ function App() {
         <Header />
         <div className="content-container">
           <Route path="/login" component={LoginPage} />
+          <Route path="/logout" component={Logout} />
           <Route path="/register" component={SignUpForm} />
           <PrivateRoute path="/dashboard">
             <DashboardPage />
@@ -34,7 +35,7 @@ function App() {
             <PostCollection />
           </PrivateRoute>
           <PrivateRoute path="/post-history/post:id">
-            <PostCard postData={previousPosts[0]} />
+            <PostCard />
           </PrivateRoute>
         </div>
       </Provider>

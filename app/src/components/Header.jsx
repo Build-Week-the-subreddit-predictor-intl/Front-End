@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Route, NavLink } from "react-router-dom";
 import { NavWrapper } from "./styled-components";
 
 export default function Header() {
+  const loggedIn = useSelector(state => state.loggedIn);
   return (
     <header>
       <NavWrapper>
@@ -19,7 +21,11 @@ export default function Header() {
               <NavLink to="/register">Sign Up</NavLink>
             </li>
             <li>
-              <NavLink to="/login">Login</NavLink>
+              {loggedIn ? (
+                <NavLink to="/logout">Logout</NavLink>
+              ) : (
+                <NavLink to="/login">Login</NavLink>
+              )}
             </li>
           </ul>
         </nav>
