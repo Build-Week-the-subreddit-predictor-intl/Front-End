@@ -8,7 +8,6 @@ import { AuthWrapper } from "./styled-components";
 function LoginForm(props) {
   return (
     <AuthWrapper>
-      {props.error && <p className="error">{props.error}</p>}
       <div className="login-form">
         <Form>
           <h2>Welcome to PostHere!</h2>
@@ -66,7 +65,7 @@ const LoginFormWithFormik = withFormik({
       )
       .then(() => tools.props.dispatch(actions.getRedditUrl()))
       .catch(() => {
-        tools.props.setError("Bad username or password");
+        tools.setFieldError("password", "Bad username or password");
       });
   }
 })(LoginForm);

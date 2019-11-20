@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import Login from "./Login";
 
 const LoginPage = () => {
-  const [error, setError] = useState("");
   const loggedIn = useSelector(state => state.loggedIn);
   const history = useHistory();
 
@@ -15,7 +14,7 @@ const LoginPage = () => {
     }
   }, [loggedIn, history]);
 
-  return <Login error={error} setError={setError} />;
+  return <Login />;
 };
 
 export default LoginPage;
