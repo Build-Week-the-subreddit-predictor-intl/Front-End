@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header>
       <NavWrapper>
-        <div className="logo">OUR LOGO</div>
+        <img className="logo" src = "https://files.slack.com/files-pri/T4JUEB3ME-FQJA37JMP/logo.jpg"/>
         <nav>
           <ul>
             <li>
