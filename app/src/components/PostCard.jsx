@@ -70,7 +70,7 @@ export default function PostCard(props) {
       {
         post.suggestion && !post.flair_text ? post.suggestion.map((subreddit)=>{
           return (
-              <button onClick = {postToReddit(post.title, post.text, subreddit, post.id)} key = {subreddit}>{`r/${subreddit}`}</button>
+              <button className = "reddit-post" onClick = {postToReddit(post.title, post.text, subreddit, post.id)} key = {subreddit}>{`Post to r/${subreddit}`}</button>
           )
         })
         :

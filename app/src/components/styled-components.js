@@ -269,8 +269,12 @@ export const PostCardWrapper = styled.div`
     background-position-x: 21px;
     background-position-y: 18px;
   }
-  button {
-      width: 90px;
+  .reddit-post {
+      position: relative;
+      margin: -20px auto 0;
+      z-index:11;
+      display: block;
+      width: 150px;
       height: 30px;
       background-color: #24a0ed;
       color: white;
