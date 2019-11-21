@@ -25,6 +25,7 @@ function App() {
       <Provider store={store}>
         <Header />
         <div className="content-container">
+          <Route exact path="/" component={LoginPage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/logout" component={Logout} />
           <Route path="/register" component={SignUpForm} />
