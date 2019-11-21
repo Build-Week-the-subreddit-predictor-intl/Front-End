@@ -1,4 +1,4 @@
-import actions, {
+import {
   LOGIN_SUCCESS,
   LOADING,
   SET_REDDIT_URL,
@@ -89,12 +89,12 @@ const reducer = (
     }
 
     case SET_REDDIT_AUTHED: {
-      console.log("authed", actions.payload);
+      console.log("authed", action.payload);
       const newState = {
         ...state,
-        redditAuthed: actions.payload.authed,
-        redditAuthState: actions.payload.state,
-        redditAuthCode: actions.payload.code,
+        redditAuth: action.payload.authed,
+        redditAuthState: action.payload.state,
+        redditAuthCode: action.payload.code,
         loading: false
       };
       localStorage.setItem("appState", JSON.stringify(newState));
@@ -124,7 +124,7 @@ const reducer = (
     case ADD_POST: {
       const newState = {
         ...state,
-        posts: [...state.posts, actions.payload],
+        posts: [...state.posts, action.payload],
         loading: false
       };
       localStorage.setItem("appState", JSON.stringify(newState));
