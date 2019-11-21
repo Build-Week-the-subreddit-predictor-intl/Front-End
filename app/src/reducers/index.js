@@ -8,7 +8,6 @@ import {
   EDIT_POST,
   DELETE,
   FETCH_POSTS,
-  POST_TO_REDDIT,
   FETCH_SINGLE
 } from "../actions";
 
@@ -42,6 +41,7 @@ const reducer = (
         loading: false,
         redditAuth: action.payload.redditAuth,
         redditToken: action.payload.redditToken,
+        redditAuthState: action.payload.redditState,
         username: action.payload.username
       };
       localStorage.setItem("appState", JSON.stringify(newState));
@@ -59,7 +59,6 @@ const reducer = (
     }
 
     case SET_REDDIT_AUTHED: {
-      console.log("authed", action.payload);
       const newState = {
         ...state,
         redditAuth: action.payload.authed,

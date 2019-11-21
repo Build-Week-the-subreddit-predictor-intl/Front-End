@@ -49,8 +49,6 @@ const login = ({ username, password }) => dispatch => {
     .post(`${baseUrl}/auth/login`, { username, password })
     .then(res => {
       localStorage.setItem("token", res.data.token);
-      console.log(res);
-
       dispatch(loginSuccess({ ...res.data, username }));
     });
 };
@@ -63,7 +61,7 @@ const register = ({ username, password }) => dispatch => {
     .then(() => {
       dispatch(loadComplete());
     })
-    .catch(err => console.log(err.response));
+    .catch(err => console.error(err.response));
 };
 
 const getRedditUrl = () => dispatch => {
@@ -108,7 +106,6 @@ const getRecommendedSubreddit = ({ title, text }) => dispatch => {
       text
     })
     .then(res => {
-      console.log(res);
       dispatch(addPost(res.data));
     })
     .catch(err => console.error(err));
@@ -124,16 +121,12 @@ const editPostDraft = postData => dispatch => {
   return axiosAuth()
     .put(`${baseUrl}/posts/${postData.id}`, post)
     .then(res => {
-      console.log(res);
       dispatch(editPost(res.data));
     })
     .catch(err => console.error(err));
 };
 
 const postToReddit = ({ title, text, state, subreddit, id }) => dispatch => {
-  //need a way to display that the post was submitted to reddit. Maybe disable
-  //submit to reddit button
-  // dispatch(loading());
   return axiosAuth()
     .post(`${baseUrl}/posts/reddit`, {
       title,
@@ -142,8 +135,8 @@ const postToReddit = ({ title, text, state, subreddit, id }) => dispatch => {
       subreddit
     })
     .then(res => {
-      console.log(res);
-      postToRedditSuccess(id, title, res.data.name);
+      dispatch(postToRedditSuccess(id, title, text, res.data.name));
+      window.open(`https://www.reddit.com/r/${subreddit}`, "_blank");
     })
     .catch(err => console.error(err));
 };
@@ -154,7 +147,7 @@ const fetchPosts = () => dispatch => {
     .then(response => {
       dispatch(setPosts(response.data));
     })
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
 };
 
 const fetchSingle = id => dispatch => {
@@ -163,18 +156,17 @@ const fetchSingle = id => dispatch => {
     .then(response => {
       dispatch(getSinglePost(response.data));
     })
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
 };
 
-const postToRedditSuccess = (id, title, flair_text) => dispatch =>{
+const postToRedditSuccess = (id, title, text, flair_text) => dispatch => {
   return axiosAuth()
-  .put(`${baseUrl}/posts/${id}`, {title, flair_text})
-  .then(res => {
-    console.log(res);
-    dispatch(editPost(res.data));
-  })
-  .catch(err => console.error(err));
-}
+    .put(`${baseUrl}/posts/${id}`, { title, text, flair_text })
+    .then(res => {
+      dispatch(fetchPosts());
+    })
+    .catch(err => console.error(err));
+};
 
 export default {
   login,
