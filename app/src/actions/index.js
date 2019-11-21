@@ -13,6 +13,9 @@ export const DELETE = "DELETE";
 export const POST_TO_REDDIT = "POST_TO_REDDIT";
 export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
+export const FETCH_POSTS = "FETCH_POSTS";
+export const FETCH_SINGLE = "FETCH_SINGLE";
+
 
 const loading = () => ({ type: LOADING });
 
@@ -36,12 +39,19 @@ const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
 };
 
+const setPosts = payload => ({type: FETCH_POSTS, payload})
+
+const getSinglePost = payload => ({type: FETCH_SINGLE, payload})
+
+
 const login = ({ username, password }) => dispatch => {
   dispatch(loading());
   return axiosAuth()
     .post(`${baseUrl}/auth/login`, { username, password })
     .then(res => {
       localStorage.setItem("token", res.data.token);
+      console.log(res);
+      
       dispatch(loginSuccess({ ...res.data, username }));
     });
 };
@@ -90,18 +100,18 @@ const deleteById = id => dispatch => {
     .catch(err => console.error(err));
 };
 
-const getRecommendedSubreddit = ({ title, body }) => dispatch => {
+const getRecommendedSubreddit = ({ title, text }) => dispatch => {
   dispatch(loading());
 
   return axiosAuth()
     .post(`${baseUrl}/api/posts`, {
       title,
-      body
+      text
     })
     .then(res => {
       console.log(res);
       dispatch(
-        addPost({ title: res.data.title, body: res.data.body, id: res.data.id })
+        addPost({ title: res.data.title, text: res.data.text, id: res.data.id })
       );
     })
     .catch(err => console.error(err));
@@ -112,7 +122,7 @@ const editPostDraft = postData => dispatch => {
 
   const post = {};
   if (postData.title) post.title = postData.title;
-  if (postData.body) post.body = postData.body;
+  if (postData.text) post.text = postData.text;
 
   return axiosAuth()
     .put(`${baseUrl}/api/posts/${postData.id}`, post)
@@ -123,7 +133,7 @@ const editPostDraft = postData => dispatch => {
     .catch(err => console.error(err));
 };
 
-const postToReddit = ({ title, body, subreddit }) => dispatch => {
+const postToReddit = ({ title, text, subreddit }) => dispatch => {
   //need a way to display that the post was submitted to reddit. Maybe disable
   //submit to reddit button
   const redditAuthState = useSelector(state => state.redditAuthState);
@@ -131,7 +141,7 @@ const postToReddit = ({ title, body, subreddit }) => dispatch => {
   return axiosAuth()
     .post(`${baseUrl}/api/posts/reddit`, {
       title,
-      body,
+      text,
       state: redditAuthState,
       subreddit
     })
@@ -142,6 +152,25 @@ const postToReddit = ({ title, body, subreddit }) => dispatch => {
     .catch(err => console.error(err));
 };
 
+const fetchPosts = () => dispatch =>{
+
+  return axiosAuth()
+    .get(`${baseUrl}/api/posts`)
+      .then(response =>{
+        dispatch(setPosts(response.data));
+      })
+      .catch(error => console.log(error));
+}
+
+const fetchSingle = (id) => dispatch=>{
+  return axiosAuth()
+    .get(`${baseUrl}/api/posts/${id}`)
+      .then(response =>{
+        dispatch(getSinglePost(response.data));
+      })
+      .catch(error => console.log(error));
+}
+
 export default {
   login,
   logout,
@@ -151,5 +180,7 @@ export default {
   sendRedditAuthToBackend,
   deleteById,
   editPostDraft,
-  postToReddit
+  postToReddit,
+  fetchPosts,
+  fetchSingle
 };
