@@ -17,9 +17,11 @@ export default function Header() {
             <li>
               <NavLink to="/post-history">Post History</NavLink>
             </li>
-            <li>
-              <NavLink to="/register">Sign Up</NavLink>
-            </li>
+            {!loggedIn && (
+              <li>
+                <NavLink to="/register">Sign Up</NavLink>
+              </li>
+            )}
             <li>
               {loggedIn ? (
                 <NavLink to="/logout">Logout</NavLink>
