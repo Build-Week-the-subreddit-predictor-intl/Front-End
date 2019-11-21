@@ -131,9 +131,6 @@ const editPostDraft = postData => dispatch => {
 };
 
 const postToReddit = ({ title, text, state, subreddit, id }) => dispatch => {
-  //need a way to display that the post was submitted to reddit. Maybe disable
-  //submit to reddit button
-  // dispatch(loading());
   return axiosAuth()
     .post(`${baseUrl}/posts/reddit`, {
       title,
@@ -143,7 +140,9 @@ const postToReddit = ({ title, text, state, subreddit, id }) => dispatch => {
     })
     .then(res => {
       console.log(res);
-      postToRedditSuccess(id, title, res.data.name);
+      console.log(id, title);
+      dispatch(postToRedditSuccess(id, title, text, res.data.name));
+      window.open(`https://www.reddit.com/r/${subreddit}`, "_blank");
     })
     .catch(err => console.error(err));
 };
@@ -166,15 +165,15 @@ const fetchSingle = id => dispatch => {
     .catch(error => console.log(error));
 };
 
-const postToRedditSuccess = (id, title, flair_text) => dispatch =>{
+const postToRedditSuccess = (id, title, text, flair_text) => dispatch => {
   return axiosAuth()
-  .put(`${baseUrl}/posts/${id}`, {title, flair_text})
-  .then(res => {
-    console.log(res);
-    dispatch(editPost(res.data));
-  })
-  .catch(err => console.error(err));
-}
+    .put(`${baseUrl}/posts/${id}`, { title, text, flair_text })
+    .then(res => {
+      console.log(res);
+      dispatch(fetchPosts());
+    })
+    .catch(err => console.error(err));
+};
 
 export default {
   login,
