@@ -6,8 +6,6 @@ import PostCard from "./PostCard";
 
 export default function PostCollection(props) {
   const location = useLocation();
-
-  console.log(location);
   const posts = useSelector(state => state.posts);
   if (!posts) {
     return <h2 className="loader">Loading...</h2>;
