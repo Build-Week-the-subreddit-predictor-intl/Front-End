@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import actions from "../actions";
 
@@ -7,12 +6,15 @@ import PostCard from "./PostCard";
 
 export default function PostCollection(props) {
   const dispatch = useDispatch();
+  const posts = useSelector(state => state.posts);
+  const getUsersPosts = useCallback(() => dispatch(actions.fetchPosts()), [
+    dispatch
+  ]);
 
   useEffect(() => {
-    dispatch(actions.fetchPosts());
-  }, [dispatch]);
+    getUsersPosts();
+  }, [getUsersPosts]);
 
-  const posts = useSelector(state => state.posts);
   if (!posts) {
     return <h2 className="loader">Loading...</h2>;
   } else {

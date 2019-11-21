@@ -10,7 +10,7 @@ import { ButtonReddit } from "./styled-components";
 const DashBoardWithRedditAuth = () => {
   const redditUrl = useSelector(state => state.redditAuthUrl);
   const authed = useSelector(state => state.redditAuth);
-  const posts = useSelector(state=> state.posts);
+  const posts = useSelector(state => state.posts);
   const [postData, setPostData] = useState();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -19,7 +19,10 @@ const DashBoardWithRedditAuth = () => {
     exact: true
   });
 
+  const matchId = match && match.params.id ? match.params.id : null;
+
   useEffect(() => {
+    console.log(1);
     const values = queryString.parse(location.search);
     dispatch(actions.getRedditUrl());
     if (!authed && values.state) {
@@ -32,23 +35,21 @@ const DashBoardWithRedditAuth = () => {
     }
   }, [authed, dispatch, location.search]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setPostData({
-      title: (match && match.params.id) ? posts.find(post=>`${post.id}` === match.params.id).title : "",
-      text: (match && match.params.id) ? posts.find(post=>`${post.id}` === match.params.id).text : "",
-      id: (match && match.params.id) ? match.params.id : ""
+      title: matchId ? posts.find(post => `${post.id}` === matchId).title : "",
+      text: matchId ? posts.find(post => `${post.id}` === matchId).text : "",
+      id: matchId ? matchId : ""
     });
-  }, [match, posts]);
-
-  useEffect(()=>{
-    // console.log(postData);
-    
-  }, [postData])
+  }, [posts, matchId]);
 
   return (
     <>
       {authed ? (
-        <DashboardWithFormik {...postData} isEditing = {match && match.params.id ? true : false}/>
+        <DashboardWithFormik
+          {...postData}
+          isEditing={match && match.params.id ? true : false}
+        />
       ) : (
         <a href={redditUrl}>
           <ButtonReddit>Authorize with Reddit</ButtonReddit>

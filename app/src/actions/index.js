@@ -109,9 +109,7 @@ const getRecommendedSubreddit = ({ title, text }) => dispatch => {
     })
     .then(res => {
       console.log(res);
-      dispatch(
-        addPost({ title: res.data.title, text: res.data.text, id: res.data.id })
-      );
+      dispatch(addPost(res.data));
     })
     .catch(err => console.error(err));
 };
