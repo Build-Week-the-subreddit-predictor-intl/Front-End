@@ -95,7 +95,7 @@ const sendRedditAuthToBackend = ({ state, code }) => dispatch => {
 
 const deleteById = id => dispatch => {
   return axiosAuth()
-    .delete(`${baseUrl}/api/posts/${id}`)
+    .delete(`${baseUrl}/posts/${id}`)
     .then(() => dispatch(deletePost(id)))
     .catch(err => console.error(err));
 };
@@ -104,7 +104,7 @@ const getRecommendedSubreddit = ({ title, text }) => dispatch => {
   dispatch(loading());
 
   return axiosAuth()
-    .post(`${baseUrl}/api/posts`, {
+    .post(`${baseUrl}/posts`, {
       title,
       text
     })
@@ -125,7 +125,7 @@ const editPostDraft = postData => dispatch => {
   if (postData.text) post.text = postData.text;
 
   return axiosAuth()
-    .put(`${baseUrl}/api/posts/${postData.id}`, post)
+    .put(`${baseUrl}/posts/${postData.id}`, post)
     .then(res => {
       console.log(res);
       dispatch(editPost(res.data));
@@ -139,7 +139,7 @@ const postToReddit = ({ title, text, subreddit }) => dispatch => {
   const redditAuthState = useSelector(state => state.redditAuthState);
   // dispatch(loading());
   return axiosAuth()
-    .post(`${baseUrl}/api/posts/reddit`, {
+    .post(`${baseUrl}/posts/reddit`, {
       title,
       text,
       state: redditAuthState,
@@ -155,7 +155,7 @@ const postToReddit = ({ title, text, subreddit }) => dispatch => {
 const fetchPosts = () => dispatch =>{
 
   return axiosAuth()
-    .get(`${baseUrl}/api/posts`)
+    .get(`${baseUrl}/posts`)
       .then(response =>{
         dispatch(setPosts(response.data));
       })
@@ -164,7 +164,7 @@ const fetchPosts = () => dispatch =>{
 
 const fetchSingle = (id) => dispatch=>{
   return axiosAuth()
-    .get(`${baseUrl}/api/posts/${id}`)
+    .get(`${baseUrl}/posts/${id}`)
       .then(response =>{
         dispatch(getSinglePost(response.data));
       })
