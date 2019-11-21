@@ -126,8 +126,8 @@ export const DashboardWrapper = styled.div`
       .error {
         position: absolute;
         padding: 0 10px;
-        top: 55px;
-        left: 180px;
+        top: 0;
+        left: 50px;
         font-size: 1.3rem;
         color: red;
         background-color: #ffe6e6;
@@ -136,14 +136,23 @@ export const DashboardWrapper = styled.div`
       }
       textarea {
         width: 100%;
-        /* height: 50px; */
         border-radius: 10px;
         padding-left: 15px;
         border: 2px solid #24a0ed;
         transition: border-color ease-in-out 0.2s;
+        resize: vertical;
+        padding: 12px;
         &:hover,
         &:focus {
           border-color: #0079d3;
+        }
+        &[name="title"]{
+          height: 50px;
+          font-size: 1.6rem;
+        }
+        &[name="text"]{
+          height: 200px;
+          font-size: 1.4rem;
         }
       }
     }

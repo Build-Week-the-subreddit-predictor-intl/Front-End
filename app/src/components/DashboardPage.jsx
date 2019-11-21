@@ -47,7 +47,7 @@ const DashBoardWithRedditAuth = () => {
 
   return (
     <>
-      {authed ? (
+      {!authed ? (
         <DashboardWithFormik {...postData} isEditing = {match && match.params.id ? true : false}/>
       ) : (
         <a href={redditUrl}>
