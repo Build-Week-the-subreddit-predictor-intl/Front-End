@@ -14,15 +14,18 @@ export default function PostCard(props) {
     exact: true
   });
 
-  const link = match
-    ? `/post-history/post/${match.params.id}`
+  const matchId = match && match.params.id ? match.params.id : null;
+
+  const link = matchId
+    ? `/post-history/post/${matchId}`
     : `/post-history/post/${props.postData.id}`;
 
   useEffect(() => {
-    if (match) {
-      dispatch(actions.fetchSingle(match.params.id));
+    if (matchId) {
+      dispatch(actions.fetchSingle(matchId));
     }
-  }, [dispatch, match]);
+  }, [dispatch, matchId]);
+
   const posts = useSelector(state => state.posts);
   const filterPost = match
     ? posts.find(post => `${post.id}` === match.params.id)
