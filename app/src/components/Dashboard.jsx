@@ -1,9 +1,9 @@
 import React from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-
+import {connect} from 'react-redux';
 import { DashboardWrapper } from "./styled-components";
+import actions from '../actions';
 
 function Dashboard(props) {
   return (
@@ -37,7 +37,7 @@ function Dashboard(props) {
             />
           </label>
 
-          <button type="submit">Submit Post</button>
+          <button type="submit">See Suggestions</button>
         </Form>
       </div>
 
@@ -47,10 +47,11 @@ function Dashboard(props) {
 }
 
 const DashboardWithFormik = withFormik({
-  mapPropsToValues() {
+  mapPropsToValues(props) {
+    console.log(props);
     return {
-      title: "",
-      text: ""
+      title: props.title,
+      text: props.text
     };
   },
 
@@ -59,20 +60,28 @@ const DashboardWithFormik = withFormik({
     text: Yup.string().required("Your post needs to contain some text")
   }),
 
+  enableReinitialize: true,
+
   handleSubmit(values, tools) {
     // values: the values we get back from the form
     // tools: some helpful methods we can use to interact with the form
-
-    axios
-      .post("URL HERE", values)
-      .then(res => {
-        console.log(res.data);
-        tools.resetForm();
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if(tools.props.isEditing){
+      tools.props.dispatch(
+        actions.editPostDraft({
+          title: values.title,
+          text: values.text,
+          id: tools.props.id
+        })
+      )
+    }else{
+      tools.props.dispatch(
+        actions.getRecommendedSubreddit({
+          title: values.title,
+          text: values.text,
+        })
+      )
+    }
   }
 })(Dashboard);
 
-export default DashboardWithFormik;
+export default connect()(DashboardWithFormik);

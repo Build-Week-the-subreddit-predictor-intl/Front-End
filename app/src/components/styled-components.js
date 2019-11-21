@@ -75,11 +75,9 @@ export const NavWrapper = styled.div`
   width: 100%;
   background-color: white;
   .logo {
-    width: 120px;
+    width: 150px;
     height: 50px;
-    background-color: orangered;
-    color: white;
-    font-family: sans-serif;
+    margin-left: 10px;
   }
 
   nav {
