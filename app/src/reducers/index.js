@@ -59,7 +59,6 @@ const reducer = (
     }
 
     case SET_REDDIT_AUTHED: {
-      console.log("authed", action.payload);
       const newState = {
         ...state,
         redditAuth: action.payload.authed,

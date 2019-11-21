@@ -74,7 +74,6 @@ const SignUpFormWithFormik = withFormik({
   handleSubmit(values, tools) {
     // values: the values we get back from the form
     // tools: some helpful methods we can use to interact with the form
-    console.log(values.username, values.password);
     tools.props
       .dispatch(
         actions.register({

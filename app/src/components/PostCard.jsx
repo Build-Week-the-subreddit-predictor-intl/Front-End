@@ -46,7 +46,6 @@ export default function PostCard(props) {
     ? posts.find(post => `${post.id}` === match.params.id)
     : "";
   const post = filterPost || props.postData;
-  console.log(post);
 
   return (
     <PostCardWrapper className="post-card">
@@ -68,7 +67,6 @@ export default function PostCard(props) {
       </div>
       {post.suggestion && !post.flair_text
         ? post.suggestion.map(subreddit => {
-            console.log(post.id);
             return (
               <button
                 className="reddit-post"
