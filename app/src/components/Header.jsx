@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header>
       <NavWrapper>
-        <img className="logo" src = {logo}/>
+        <img className="logo" src = {logo} alt="" />
         <nav>
           <ul>
             <li>

@@ -16,7 +16,6 @@ export const EDIT_POST = "EDIT_POST";
 export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_SINGLE = "FETCH_SINGLE";
 
-
 const loading = () => ({ type: LOADING });
 
 const loadComplete = () => ({ type: LOAD_COMPLETE });
@@ -37,12 +36,12 @@ const editPost = payload => ({ type: EDIT_POST, payload });
 
 const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
+  localStorage.removeItem("token");
 };
 
-const setPosts = payload => ({type: FETCH_POSTS, payload})
+const setPosts = payload => ({ type: FETCH_POSTS, payload });
 
-const getSinglePost = payload => ({type: FETCH_SINGLE, payload})
-
+const getSinglePost = payload => ({ type: FETCH_SINGLE, payload });
 
 const login = ({ username, password }) => dispatch => {
   dispatch(loading());
@@ -51,7 +50,7 @@ const login = ({ username, password }) => dispatch => {
     .then(res => {
       localStorage.setItem("token", res.data.token);
       console.log(res);
-      
+
       dispatch(loginSuccess({ ...res.data, username }));
     });
 };
@@ -152,24 +151,23 @@ const postToReddit = ({ title, text, subreddit }) => dispatch => {
     .catch(err => console.error(err));
 };
 
-const fetchPosts = () => dispatch =>{
-
+const fetchPosts = () => dispatch => {
   return axiosAuth()
     .get(`${baseUrl}/posts`)
-      .then(response =>{
-        dispatch(setPosts(response.data));
-      })
-      .catch(error => console.log(error));
-}
+    .then(response => {
+      dispatch(setPosts(response.data));
+    })
+    .catch(error => console.log(error));
+};
 
-const fetchSingle = (id) => dispatch=>{
+const fetchSingle = id => dispatch => {
   return axiosAuth()
     .get(`${baseUrl}/posts/${id}`)
-      .then(response =>{
-        dispatch(getSinglePost(response.data));
-      })
-      .catch(error => console.log(error));
-}
+    .then(response => {
+      dispatch(getSinglePost(response.data));
+    })
+    .catch(error => console.log(error));
+};
 
 export default {
   login,
