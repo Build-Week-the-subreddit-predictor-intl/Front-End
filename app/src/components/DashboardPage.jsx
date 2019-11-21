@@ -38,7 +38,7 @@ const DashBoardWithRedditAuth = () => {
       text: (match && match.params.id) ? posts.find(post=>`${post.id}` === match.params.id).text : "",
       id: (match && match.params.id) ? match.params.id : ""
     });
-  }, []);
+  }, [match, posts]);
 
   useEffect(()=>{
     // console.log(postData);

@@ -1,17 +1,16 @@
 import React from "react";
-import {useEffect} from 'react';
-import { useSelector , useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
-import actions from '../actions';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import actions from "../actions";
 
 import PostCard from "./PostCard";
 
 export default function PostCollection(props) {
   const dispatch = useDispatch();
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     dispatch(actions.fetchPosts());
-  },[dispatch]);
+  }, [dispatch]);
 
   const posts = useSelector(state => state.posts);
   if (!posts) {

@@ -103,7 +103,7 @@ const reducer = (
 
     case LOGOUT: {
       const newState = {
-        ...state,
+        ...initialState,
         loggedIn: false,
         loading: false
       };
@@ -112,7 +112,6 @@ const reducer = (
     }
 
     case DELETE: {
-      
       const newState = {
         ...state,
         posts: state.posts.filter(post => post.id !== action.payload),
@@ -159,7 +158,9 @@ const reducer = (
     case FETCH_SINGLE: {
       const newState = {
         ...state,
-        posts: state.posts.includes(action.payload) ? [...state.posts] : [...state.posts, action.payload],
+        posts: state.posts.includes(action.payload)
+          ? [...state.posts]
+          : [...state.posts, action.payload],
         loading: false
       };
       localStorage.setItem("appState", JSON.stringify(newState));
