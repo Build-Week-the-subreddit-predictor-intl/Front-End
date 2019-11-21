@@ -34,8 +34,11 @@ function App() {
           <PrivateRoute exact path="/post-history">
             <PostCollection />
           </PrivateRoute>
-          <PrivateRoute path="/post-history/post/:id">
+          <PrivateRoute exact path="/post-history/post/:id">
             <PostCard />
+          </PrivateRoute>
+          <PrivateRoute exact path="/post-history/post/:id/edit">
+            <DashboardPage />
           </PrivateRoute>
         </div>
       </Provider>
