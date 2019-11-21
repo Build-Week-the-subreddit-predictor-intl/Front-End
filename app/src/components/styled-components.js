@@ -137,6 +137,7 @@ export const DashboardWrapper = styled.div`
       textarea {
         width: 100%;
         /* height: 50px; */
+        resize: vertical;
         border-radius: 10px;
         padding-left: 15px;
         border: 2px solid #24a0ed;
@@ -144,6 +145,9 @@ export const DashboardWrapper = styled.div`
         &:hover,
         &:focus {
           border-color: #0079d3;
+        }
+        &[name = "text"]{
+          height: 250px;
         }
       }
     }
@@ -205,7 +209,7 @@ export const PostCardWrapper = styled.div`
 
   .box-header {
     margin-bottom: 20px;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -219,6 +223,8 @@ export const PostCardWrapper = styled.div`
   .box-body {
     font-size: 1.5rem;
     line-height: 30px;
+    word-break: break-all;
+    text-align: left;
   }
 
   .box:hover {
@@ -263,6 +269,22 @@ export const PostCardWrapper = styled.div`
     background-position-x: 21px;
     background-position-y: 18px;
   }
+  .reddit-post {
+      position: relative;
+      margin: -20px auto 0;
+      z-index:11;
+      display: block;
+      width: 150px;
+      height: 30px;
+      background-color: #24a0ed;
+      color: white;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+      transition: background-color ease-in-out 0.2s;
+      &:hover {
+        background-color: #0079d3;
+      }
 `;
 
 export const ButtonReddit = styled.button`

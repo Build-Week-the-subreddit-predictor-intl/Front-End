@@ -8,6 +8,7 @@ import {
   EDIT_POST,
   DELETE,
   FETCH_POSTS,
+  POST_TO_REDDIT,
   FETCH_SINGLE
 } from "../actions";
 
@@ -15,38 +16,7 @@ const initialState = {
   loggedIn: localStorage.getItem("token") ? true : false,
   loading: false,
   username: "",
-  posts: [
-    {
-      title: "Lorem ipsum dolor sit amet",
-      text:
-        "Painting offers freedom. The round brush is so fun, let's go back to that. Wind this up and blend it together. I want to do something that's just a little bit different, and I think you'll find it's fun. That's one of those happy accidents.",
-      id: 0
-    },
-    {
-      title: "Lorem ipsum dolor sit amet",
-      text:
-        "This piece of canvas is your world. This is a very individual thing, painting is. You'll be amazed at what you can do if you'll just try. There's too many complicated things in our life already. Maybe there's a happy little tree... he lives right there.",
-      id: 1
-    },
-    {
-      title: "Lorem ipsum dolor sit amet",
-      text:
-        "All you do is just go back with it. This is such a super day! Dance in a happy little sky. Always start with a clean brush in a light area and work outward. That's about all we need.",
-      id: 2
-    },
-    {
-      title: "Lorem ipsum dolor sit amet",
-      text:
-        "The birds would get sort of crazy. You really cannot make a mistake here. Don't be afraid to go out on a limb once in a while. It's cold, but it's beautiful. The just do nice things for you.",
-      id: 3
-    },
-    {
-      title: "Lorem ipsum dolor sit amet",
-      text:
-        "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. ",
-      id: 4
-    }
-  ]
+  posts: []
 };
 
 const storageAppState = JSON.parse(localStorage.getItem("appState"));
