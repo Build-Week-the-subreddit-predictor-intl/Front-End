@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { PostCardWrapper } from "./styled-components";
 import { useRouteMatch } from "react-router-dom";
@@ -8,6 +8,15 @@ import actions from "../actions";
 
 export default function PostCard(props) {
   const dispatch = useDispatch();
+  const redditAuthState = useSelector(state => state.redditAuthState);
+  const postToReddit = useCallback((title, text, subreddit)=> ()=>dispatch(actions.postToReddit(
+    {
+      title,
+      text,
+      state: redditAuthState,
+      subreddit
+    }
+  )), []);
 
   const match = useRouteMatch({
     path: "/post-history/post/:id",
@@ -30,17 +39,17 @@ export default function PostCard(props) {
   const filterPost = match
     ? posts.find(post => `${post.id}` === match.params.id)
     : "";
+  const post = filterPost || props.postData;
 
   return (
     <PostCardWrapper className="post-card">
       <Link to={link}>
         <div className="box">
           <div className="box-header">
-            <img src="https://via.placeholder.com/80x80" alt="" />
-            {filterPost ? filterPost.title : props.postData.title}
+            {post.title}
           </div>
           <p className="box-body">
-            {filterPost ? filterPost.text : props.postData.text}
+            {post.text}
           </p>
         </div>
       </Link>
@@ -51,13 +60,22 @@ export default function PostCard(props) {
         <button
           onClick={() =>
             dispatch(
-              actions.deleteById(filterPost ? filterPost.id : props.postData.id)
+              actions.deleteById(post.id)
             )
           }
         >
           Delete Post
         </button>
       </div>
+      {
+        post.suggestion && !post.flair_text ? post.suggestion.map((subreddit)=>{
+          return (
+              <button onClick = {postToReddit(post.title, post.text, subreddit, post.id)} key = {subreddit}>{`r/${subreddit}`}</button>
+          )
+        })
+        :
+        null
+      }
     </PostCardWrapper>
   );
 }

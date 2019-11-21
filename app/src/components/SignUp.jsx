@@ -58,15 +58,15 @@ const SignUpFormWithFormik = withFormik({
 
   validationSchema: Yup.object().shape({
     username: Yup.string().required("Please enter your Username"),
-    password: Yup.string().required("Please enter your Password"),
-    // .test(
-    //   "Length",
-    //   "Length of your password should be between 12 and 30 characters",
-    //   val =>
-    //     val && val.toString().length >= 12 && val.toString().length <= 30
-    //       ? true
-    //       : false
-    // ),
+    password: Yup.string().required("Please enter your Password")
+    .test(
+      "Length",
+      "Length of your password should be between 4 and 100 characters",
+      val =>
+        val && val.toString().length >= 4 && val.toString().length <= 100
+          ? true
+          : false
+    ),
     confirm_password: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords don't match")
       .required("Password confirm is required")

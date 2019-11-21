@@ -55,8 +55,25 @@ const DashboardWithFormik = withFormik({
   },
 
   validationSchema: Yup.object().shape({
-    title: Yup.string().required("Your post needs to have a title"),
+    title: Yup.string().required("Your post needs to have a title")
+    .test(
+      "Length",
+      "Length of your title should be less than 255 characters",
+      val =>
+        val && val.toString().length <= 255
+          ? true
+          : false
+    )
+    ,
     text: Yup.string().required("Your post needs to contain some text")
+    .test(
+      "Length",
+      "Length of your post should be less than 255 characters",
+      val =>
+        val && val.toString().length <= 255
+          ? true
+          : false
+    )
   }),
 
   enableReinitialize: true,
