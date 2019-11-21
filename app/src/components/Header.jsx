@@ -1,14 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Route, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { NavWrapper } from "./styled-components";
+import logo from '../images/logo.jpg'
 
 export default function Header() {
   const loggedIn = useSelector(state => state.loggedIn);
   return (
     <header>
       <NavWrapper>
-        <div className="logo">OUR LOGO</div>
+        <img className="logo" src = {logo}/>
         <nav>
           <ul>
             <li>
