@@ -166,15 +166,43 @@ export const DashboardWrapper = styled.div`
 `;
 
 export const PostCardWrapper = styled.div`
+  width: 70%;
+  margin: 10px auto;
+  position: relative;
+  .button-container {
+    position: absolute;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    top: 20px;
+    right: 20px;
+    button {
+      width: 90px;
+      height: 30px;
+      background-color: #24a0ed;
+      color: white;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+      transition: background-color ease-in-out 0.2s;
+      &:hover {
+        background-color: #0079d3;
+      }
+    }
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    color: black;
+  }
   .box {
     position: relative;
     background: #fff;
     box-shadow: 10px 10px 10px 0 rgba(86, 91, 119, 0.04);
     padding: 50px;
-    width: 70%;
+    width: 100%;
     border-radius: 9px;
     cursor: pointer;
-    margin: 10px auto;
   }
 
   .box-header {
@@ -213,7 +241,6 @@ export const PostCardWrapper = styled.div`
   }
 
   .box:hover:before {
-    -ms-transform: scale(1);
     transform: scale(1);
   }
 
@@ -237,5 +264,21 @@ export const PostCardWrapper = styled.div`
     justify-content: center;
     background-position-x: 21px;
     background-position-y: 18px;
+  }
+`;
+
+export const ButtonReddit = styled.button`
+  width: 180px;
+  height: 40px;
+  background-color: #24a0ed;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color ease-in-out 0.2s;
+  text-decoration: none;
+  font-size: 1.6rem;
+  &:hover {
+    background-color: #0079d3;
   }
 `;

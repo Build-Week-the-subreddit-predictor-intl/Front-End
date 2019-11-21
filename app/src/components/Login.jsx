@@ -3,6 +3,7 @@ import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import actions from "../actions";
+import {Link} from 'react-router-dom';
 import { AuthWrapper } from "./styled-components";
 
 function LoginForm(props) {
@@ -29,6 +30,7 @@ function LoginForm(props) {
           </label>
 
           <button type="submit">Log In</button>
+          <p>Don't have an account yet? <Link to = "/register">Sign Up</Link></p>
         </Form>
       </div>
     </AuthWrapper>
@@ -63,7 +65,7 @@ const LoginFormWithFormik = withFormik({
       .dispatch(
         actions.login({ username: values.username, password: values.password })
       )
-      .then(() => tools.props.dispatch(actions.getRedditUrl()))
+      
       .catch(() => {
         tools.setFieldError("password", "Bad username or password");
       });

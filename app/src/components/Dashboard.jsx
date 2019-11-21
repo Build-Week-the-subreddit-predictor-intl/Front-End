@@ -2,10 +2,8 @@ import React from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 import { DashboardWrapper } from "./styled-components";
-import PostCollection from "./PostCollection";
 
 function Dashboard(props) {
   return (
@@ -77,18 +75,4 @@ const DashboardWithFormik = withFormik({
   }
 })(Dashboard);
 
-const DashBoardWithRedditAuth = () => {
-  const redditUrl = useSelector(state => state.redditAuthUrl);
-  const authed = useSelector(state => state.redditAuthed);
-  return (
-    <>
-      {authed ? (
-        <DashboardWithFormik />
-      ) : (
-        <a href={redditUrl}>Authorize with Reddit</a>
-      )}
-    </>
-  );
-};
-
-export default DashBoardWithRedditAuth;
+export default DashboardWithFormik;

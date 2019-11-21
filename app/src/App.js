@@ -9,11 +9,13 @@ import "./App.css";
 import LoginPage from "./components/LoginPage";
 import SignUpForm from "./components/SignUp";
 import Header from "./components/Header";
-import Dashboard from "./components/Dashboard";
+import DashboardPage from "./components/DashboardPage";
 import PostCollection from "./components/PostCollection";
 import PrivateRoute from "./components/PrivateRoute";
+import Logout from "./components/Logout";
 
 import reducer from "./reducers";
+import PostCard from "./components/PostCard";
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -24,12 +26,16 @@ function App() {
         <Header />
         <div className="content-container">
           <Route path="/login" component={LoginPage} />
+          <Route path="/logout" component={Logout} />
           <Route path="/register" component={SignUpForm} />
           <PrivateRoute path="/dashboard">
-            <Dashboard />
+            <DashboardPage />
           </PrivateRoute>
-          <PrivateRoute path="/post-history">
+          <PrivateRoute exact path="/post-history">
             <PostCollection />
+          </PrivateRoute>
+          <PrivateRoute path="/post-history/post/:id">
+            <PostCard />
           </PrivateRoute>
         </div>
       </Provider>
