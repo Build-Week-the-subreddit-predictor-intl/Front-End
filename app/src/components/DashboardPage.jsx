@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useRouteMatch } from "react-router-dom";
+import { useLocation, useRouteMatch, useHistory } from "react-router-dom";
 import queryString from "query-string";
 
 import actions from "../actions";
@@ -11,6 +11,7 @@ const DashBoardWithRedditAuth = () => {
   const redditUrl = useSelector(state => state.redditAuthUrl);
   const authed = useSelector(state => state.redditAuth);
   const posts = useSelector(state => state.posts);
+  const history = useHistory();
   const [postData, setPostData] = useState();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -22,7 +23,6 @@ const DashBoardWithRedditAuth = () => {
   const matchId = match && match.params.id ? match.params.id : null;
 
   useEffect(() => {
-    console.log(1);
     const values = queryString.parse(location.search);
     dispatch(actions.getRedditUrl());
     if (!authed && values.state) {
@@ -49,6 +49,7 @@ const DashBoardWithRedditAuth = () => {
         <DashboardWithFormik
           {...postData}
           isEditing={match && match.params.id ? true : false}
+          history={history}
         />
       ) : (
         <a href={redditUrl}>
